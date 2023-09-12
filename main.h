@@ -15,6 +15,7 @@ char *locate(const char *name);
 char *join_paths(const char sep, const char *path1, const char *path2);
 int file_exists(const char *filepath);
 char *_strdup(const char *str);
+int _strcmp(const char *str1, const char *str2);
 
 extern char **environ;
 

@@ -59,12 +59,12 @@ int main()
 			
 			argv[0] = command_path;
 
-			if (fork() == 0)
-			{
-				execve (argv[0], argv, NULL);
+			while (fork() == 0)
+			{	
+				
+					execve (argv[0], argv, NULL);
 			}
 
-			else
 			{
 				wait(NULL);
 				free(command_path);
@@ -72,11 +72,19 @@ int main()
 			}
 		}
 
+		
+		else if (_strcmp(argv[0], "exit") == 0)
+        {
+            exit(0); 
+        }
+			
 		else 
 		{
-					dprintf(STDERR_FILENO, "./program: %d: %s: not found\n", argc, argv[0]);
+			dprintf(STDERR_FILENO, "./program: %d: %s: not found\n", argc, argv[0]);
+					
 		}
-	
 	}
+	
+	
 	return (0);
 }
