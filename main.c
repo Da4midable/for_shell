@@ -2,18 +2,11 @@
 
 int main()
 {
-	
-
-	char *command = NULL;
-	char *command_cpy;
-	char *command_path;
-	char **argv = NULL;
-	char *tokenized;
+	char *command, *command_cpy, *command_path, **argv, *tokenized;
 	char *delim = " \n";
 	size_t buff_size = 0;
 	ssize_t n_read = 0;
-	int i = 0, argc = 0, l = 0;
-
+	int i = 0, argc = 0;
 
 	while (1)
 	{
@@ -27,9 +20,7 @@ int main()
 		}
 
 		command_cpy = _strdup(command);
-
 		tokenized = strtok(command_cpy, delim);
-
 		argc = 0;
 
 		while(tokenized)
@@ -39,9 +30,7 @@ int main()
 		}
 
 		command_cpy = _strdup(command);
-
 		tokenized = strtok(command_cpy, delim);
-
 		argv = malloc(sizeof(char *) * (argc + 1));
 
 			i = 0;
@@ -59,10 +48,10 @@ int main()
 			
 			argv[0] = command_path;
 
-			while (fork() == 0)
+			if (fork() == 0)
 			{	
 				
-					execve (argv[0], argv, NULL);
+				execve (argv[0], argv, environ);
 			}
 
 			{
@@ -72,19 +61,12 @@ int main()
 			}
 		}
 
-		
 		else if (_strcmp(argv[0], "exit") == 0)
-        {
             exit(0); 
-        }
-			
 		else 
 		{
-			dprintf(STDERR_FILENO, "./program: %d: %s: not found\n", argc, argv[0]);
-					
+			dprintf(STDERR_FILENO, "./program: %d: %s: not found\n", argc, argv[0]);	
 		}
 	}
-	
-	
 	return (0);
 }
