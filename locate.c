@@ -11,8 +11,8 @@ char *locate(const char *name)
 		return(_strdup(name));
 	}
 
-	strtok(path, "=");
-	dir_path = strtok(NULL,":");
+	_strtok(path, "=");
+	dir_path = _strtok(NULL,":");
 
 	while (dir_path)
 	{
@@ -23,7 +23,7 @@ char *locate(const char *name)
 		}
 		free(file_path);
 		file_path = NULL;
-		dir_path = strtok(NULL, ":");
+		dir_path = _strtok(NULL, ":");
 	}
 
 	free(path);

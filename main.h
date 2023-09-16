@@ -16,6 +16,11 @@ char *join_paths(const char sep, const char *path1, const char *path2);
 int file_exists(const char *filepath);
 char *_strdup(const char *str);
 int _strcmp(const char *str1, const char *str2);
+int _atoi(const char *str);
+char *_strtok(char *str, const char *delim);
+char *_strstr(char *haystack, char *needle);
+size_t _strlen(const char *str);
+int _atoi(const char *str);
 
 extern char **environ;
 
