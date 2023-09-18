@@ -2,7 +2,7 @@
 
 int main()
 {
-	char *command, *command_cpy, *command_path, **argv, *tokenized;
+	char *command, *command_cpy, *command_path, **argv, *tokenized, *env_tok;
 	char *delim = " ";
 	size_t buff_size = 0;
 	ssize_t n_read = 0;
@@ -43,7 +43,7 @@ int main()
 			argv[i] = '\0';
 
 		command_path = locate(argv[0]);
-		if (command_path != NULL)
+		if (command_path)
 		{
 			
 			argv[0] = command_path;
@@ -62,7 +62,28 @@ int main()
 		}
 
 		else if (_strcmp(argv[0], "exit") == 0)
-            exit(_atoi(argv[1])); 
+		{
+			if (!(argv[1]))
+				exit(0);
+			if (_isdigit(argv[1]))
+				exit(_atoi(argv[1]));
+		}
+
+		else if (_strcmp(argv[0], "export") == 0)
+		{
+			env_tok = _strtok(argv[1], "=");
+			argv[1] = env_tok;
+			argv[2] = _strtok(NULL, "=");
+
+			setenv(argv[1], argv[2], 1);
+		}
+
+		else if (_strcmp(argv[0], "unset") == 0)
+		{
+				unsetenv(argv[1]);
+		}
+
+		
 		else 
 		{
 			dprintf(STDERR_FILENO, "./program: %d: %s: not found\n", argc, argv[0]);	
