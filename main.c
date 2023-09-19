@@ -3,7 +3,7 @@
 int main()
 {
 	char *command, *command_cpy, *command_path, **argv, *tokenized, *env_tok;
-	char *delim = " ";
+	char *delim = " ", buffer[BUFF_SIZE], *new_dir, *goback_dir, *env_tok2, *holdit;
 	size_t buff_size = 0;
 	ssize_t n_read = 0;
 	int i = 0, argc = 0;
@@ -80,9 +80,43 @@ int main()
 
 		else if (_strcmp(argv[0], "unset") == 0)
 		{
-				unsetenv(argv[1]);
+			unsetenv(argv[1]);
 		}
 
+		else if (_strcmp(argv[0], "cd") == 0)
+		{
+			if (!(argv[1]))
+			{
+				new_dir = _getenv("HOME");
+				env_tok = _strtok(new_dir, "=");
+				argv[1] = env_tok;
+				argv[2] = _strtok(NULL, "=");
+				getcwd(buffer, BUFF_SIZE);
+				setenv("OLDPWD", buffer, 1);
+				chdir(argv[2]);	
+			}
+			
+			else if (_strcmp(argv[1], "-") == 0)
+			{
+				goback_dir = _getenv("OLDPWD");
+				env_tok = _strtok(goback_dir, "=");
+				argv[1] = env_tok2;
+				argv[2] = _strtok(NULL, "=");
+				getcwd(buffer, BUFF_SIZE);
+				setenv("OLDPWD", buffer, 1);
+				chdir(argv[2]);
+			}
+
+			else
+			{
+				
+				getcwd(buffer, BUFF_SIZE);
+				setenv("OLDPWD", buffer, 1);
+				chdir(argv[1]);
+			
+			}
+				
+		}
 		
 		else 
 		{
