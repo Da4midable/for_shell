@@ -1,5 +1,11 @@
 #include "main.h"
 
+/**
+* locate - finds a command in the tokenized PATH environment
+* @name: main command to be searched
+* Return: file_path
+*/
+
 char *locate(const char *name)
 {
 	char *path = _getenv("PATH");
@@ -8,16 +14,16 @@ char *locate(const char *name)
 
 	if (access(name, F_OK) == 0)
 	{
-		return(_strdup(name));
+		return (_strdup(name));
 	}
 
 	_strtok(path, "=");
-	dir_path = _strtok(NULL,":");
+	dir_path = _strtok(NULL, ":");
 
 	while (dir_path)
 	{
 		file_path = join_paths('/', dir_path, name);
-		if (file_exists(file_path))
+		if (access(file_path, F_OK) == 0)
 		{
 			break;
 		}

@@ -11,6 +11,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+#define BUFF_SIZE 1024
+
 char *_getenv(const char *name);
 char *locate(const char *name);
 char *join_paths(const char sep, const char *path1, const char *path2);

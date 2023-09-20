@@ -1,5 +1,12 @@
 #include "main.h"
 
+/**
+* _strtok - tokenizes a string into other strings
+* @str: the main string to be tokenized
+* @delim: the delimiter to indicate the location of tokenization
+* Return: token
+*/
+
 char *_strtok(char *str, const char *delim)
 {
 	static char *cpy_str;
@@ -23,13 +30,13 @@ char *_strtok(char *str, const char *delim)
 	}
 	else
 	{
-		
+
 		if (*cpy_str)
 		{
 			token = cpy_str;
 			cpy_str += _strlen(cpy_str);
 		}
-		
+
 		else
 		{
 			token = NULL;

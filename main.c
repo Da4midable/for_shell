@@ -1,6 +1,11 @@
 #include "main.h"
 
-int main()
+/**
+* main - main function to be used to compile program
+* Return: zero
+*/
+
+int main(void)
 {
 	char *command, *command_cpy, *command_path, **argv, *tokenized, *env_tok;
 	char *delim = " ", buffer[BUFF_SIZE], *new_dir, *goback_dir, *env_tok2, *holdit;
